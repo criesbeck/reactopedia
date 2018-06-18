@@ -1,0 +1,120 @@
+#main {
+  text-align: center;
+}
+
+@media screen {
+  footer {
+  }
+}
+
+@media print {
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+figcaption {
+  border-bottom: 2px solid grey;
+  font-size: .9em;
+  margin-bottom: 1em;
+  padding: 5px; 
+  text-align: center; 
+}
+
+figure img {
+  height: auto;
+  max-width: 100%;
+}
+
+.book-title {
+  color: white; 
+  font-size: 4em; 
+  left: -.12em; 
+  position: relative; 
+  transform: rotate(90deg); 
+  transform-origin: top left;
+  white-space: nowrap;
+}
+
+.container {
+  border-left: 4.1em solid #369; 
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.debugging-data {
+  display: block; 
+}
+
+.link-label, .title {
+  text-transform: capitalize;
+}
+
+.link-list li {
+  list-style-position: inside;
+}
+
+.link-items a {
+  border: lightgrey 2px dotted;
+  display: inline-block;
+  margin: 2px;
+  padding: 2px 3px;
+}
+
+.page-table th, .page-table td {
+  padding: 5px;
+}
+
+.page-table th {
+  width: 30%;
+}
+
+.summary { 
+  border: 2px solid grey; 
+  margin: 5px 2em; 
+  padding: 5px; 
+}
+
+.image-box, #item-body figure, .text-box, #item-body > .row > div, .item-box > div {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.row {
+  display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+}
+
+.row div {
+  border: 1px solid grey;
+  text-align: left;
+}
+
+.file-exists {
+  border: lightgrey 2px dotted;
+  margin: 1em;
+  padding: 0 1em;
+}
+
+.file-missing {
+  background-color: #ffcccc;
+}
+
+#item-body > .row > #activities.page-items {
+  display: block;
+  margin: 2px;
+  max-width: 90%;
+  padding: 2px 3px;
+  position: relative;
+  width: 7in;
+}
+
+.page-item {
+  page-break-after: always;
+  position: relative;
+  width: 90%;
+}

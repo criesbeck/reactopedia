@@ -1,0 +1,48 @@
+<div>
+  Estimates for when a software project will finish are
+  notorious for being wrong by a factor of two or more.
+  <a href="#velocity">Velocity</a> can provide
+  more realistic, data-based estimates.
+</div>
+
+<div>
+  What follows is a toy example to demonstrate
+  velocity math. You should first
+  look at how the same situation would be
+  handled by <a href="#gantt-math">Gantt math</a>.
+</div>
+
+<figure>
+  <img src="images/velocity-math-1.png">
+  <figcaption>Initial Project Estimate
+  </figcaption>
+</figure>
+
+<div>
+  The developers split the user stories up, until they
+  are what they think are one-day efforts. They
+  end up with 20 stories, each one point.
+  Over previous projects, the developer team's average
+  velocity was 5 points per week, so that's the 
+  initial guess. At that velocity, taking weekends into account,
+  the project should finish by April 22nd. 
+</div>
+
+<div>
+  After the first full week of development, the developers
+  finished 4 points of stories. Now they use velocity math
+  to predict when the project might complete, using
+  a <a href="#burndown-chart">burndown chart</a>.
+</div>
+
+<figure>
+  <img src="images/velocity-math-2.png">
+  <figcaption>Updated Project Estimate
+  </figcaption>
+</figure>
+
+<div>
+  With an actual velocity of 4 points per week, the
+  prediction is obvious. The project will take 5 iterations.
+  It will finish on April 29.
+</div>

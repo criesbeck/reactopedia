@@ -1,0 +1,15 @@
+<table class="table-bordered page-table text-box wide">
+  <thead>
+    <th colspan="2">Agile Development Activities</th>
+  </thead>
+  <tbody id="activities" class="link-items" data-template="activity-template">  
+    <script type="text/html" id="activity-template">
+      {{#allActivityNodes}}
+      <tr>
+        <th><a href="#{{name}}">{{title}}</a></th>
+        <td>{{summary}}</td>
+      </tr>
+      {{/allActivityNodes}}
+    </script>
+ </tbody>
+</table>

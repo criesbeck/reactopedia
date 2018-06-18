@@ -1,0 +1,246 @@
+{ 
+  "entryPoints": [ "activities", "tools", "pages" ],
+  "items": [
+    { "name": "entry-points",
+      "summary": "Table of contents",
+      "type": "index"
+    }, 
+    { "name": "activities",
+      "summary": "Key Agile development activities.",
+      "type": "index"
+    },
+    { "name": "tools",
+      "summary": "Key Agile tools.",
+      "type": "index"
+    },
+    { "name": "pages",
+      "summary": "All pages.",
+      "type": "page-list"
+    },
+    { "name": "day-1",
+      "summary": "Key topics for first class.",
+      "url": "lesson",
+      "type": "page-list",
+      "topics": [ "vision-first-slice", "iteration-planning", "kano-model", 
+        "agile-inception-deck", "4-panel-storyboard",
+        "vertical-slice", "product-box", "use-case-diagram",
+        "user-story", "backlog", "scenario", "scenario-canvas"
+      ]
+    },
+    { "name": "day-2",
+      "summary": "Key topics for second class.",
+      "url": "lesson",
+      "type": "page-list",
+      "topics": [ "user-testing", "task-scenario", 
+        "story-expansion", "task-board",
+        "acceptance-test", "ui-sketch",
+        "tracking",
+        "story-point", "velocity", "burndown-chart", 
+        "burnup-chart", "speed-up", "deadline-slip", "rescoping",
+        "plan-b", 
+        "gantt-math", "velocity-math"
+      ]
+    },
+    { "name": "day-3",
+      "summary": "Key topics for third class.",
+      "url": "lesson",
+      "type": "page-list",
+      "topics": [ "retrospective", "metrics-that-matter",
+        "cause-effect-diagram", "teams", "scale-up"
+      ]
+    },
+    {
+      "name": "agile-client-toolbox",
+      "title": "The Agile Client Toolbox"
+    },
+    {
+      "name": "vision-first-slice",
+      "title": "Vision to First Slice",
+      "type": "activity",
+      "summary": "Telling developers the most important things they need to know: a lot of why, a thin slice of what."
+    },
+    { "name": "build-measure-learn",
+      "type": "activity",
+      "summary": "The goal of lean startups is to iterate through the cycle of building and learning as quickly as possible."
+    },
+    {
+      "name": "vertical-slice",
+      "type": "tool",
+      "summary": "A thin end-to-end implementation of functionality."
+    },
+    { "name": "scenario",
+      "type": "tool",
+      "summary": "Scenarios tell the story of who and what your app is for, to investors, users, and developers",
+      "goodness": "high"
+    },
+    { "name": "4-panel-storyboard",
+      "title": "4-Panel storyboard",
+      "type": "tool",
+      "url": "four-panel",
+      "summary": "A tightly constrained visual narrative of an app's value, from persona, context, and problem through payoff and conclusion."
+    },
+    { "name": "product-box",
+      "type": "tool",
+      "summary": "An at-a-glance depiction of your product."
+    },
+    { "name": "agile-inception-deck",
+      "type": "tool",
+      "summary": "A set of slides answering key questions about project goals.",
+      "readings": [
+        { "title": "The Agile Inception Deck",
+          "url": "https://agilewarrior.wordpress.com/2010/11/06/the-agile-inception-deck/"
+        }
+      ]
+    },
+    { "name": "backlog",
+      "type": "tool",
+      "summary": "A prioritized list of user stories.",
+      "goodness": "high"
+    },
+    { "name": "use-case-diagram",
+      "type": "tool",
+      "summary": "A simple visual overview of the types of users and tasks your app will support."
+    },
+    { "name": "use-case-diagram-class-story",
+      "summary": "Use case diagrams help manage requirement complexity."
+    },
+    { "name": "user-story",
+      "type": "tool",
+      "summary": "A one-sentence description of what a user should be able to accomplish."
+    },
+    { "name": "kano-model",
+      "type": "tool",
+      "summary": "A model of how product features lead to user satisfaction."
+    },
+    { "name": "scenario-canvas",
+      "type": "tool",
+      "summary": "A scenario and the user stories it requires."
+    },
+    { "name": "interleaved-development",
+      "type": "activity",
+      "summary": "Interleave design, development, and testing, from the start."
+    },
+    { "name": "iteration-planning",
+      "type": "activity",
+      "summary": "Rescope, then select and expand user stories for next iteration. May also include task time estimates."
+    },
+    { "name": "work-in-progress",
+      "type": "tool",
+      "summary": "Minimize work in progress. Finish one story or scenario before starting another."
+    },
+    { "name": "rescoping",
+      "title": "Rescoping",
+      "type": "activity",
+      "summary": "Adjusting the stories in the backlog to align with deadlines and velocity data"
+    },
+    { "name": "retrospective",
+       "type": "activity",
+      "summary": "A meeting to analyze and remove development process problems.",
+      "goodness": "high"
+    },
+    { "name": "scale-up",
+      "type": "activity",
+      "summary": "Applying agile at a larger level in the enterprise."
+    },
+    {
+      "name": "teams",
+      "type": "concept",
+      "summary": "Project success ultimately depends on the agile client's relationship with the development team"
+    },
+    { "name": "story-expansion",
+      "type": "activity",
+      "summary": "For each story to be implemented, define acceptance tests, UI sketches, and task scenarios to test for desired user impact."
+    },
+    { "name": "acceptance-test",
+      "type": "tool",
+      "summary": "An app flow scenario, with specific inputs and outputs and other details, sufficient for developers and client to define 'done' for a user story"
+    },
+    { "name": "tdd",
+      "title": "Test-Driven Development",
+      "type": "tool",
+      "summary": "Test-driven development means you write testing code before you write the code to be tested."
+    },
+    { "name": "ui-sketch",
+      "title": "UI Sketch",
+      "type": "tool",
+      "summary": "A rough diagram of an interface or interface flow"
+    },
+    { "name": "task-scenario",
+      "type": "tool",
+      "summary": "A situation to put test users into."
+    },
+    { "name": "task-board",
+      "type": "tool",
+      "summary": "A visual display of story cards, with subtasks, organized into to do, doing, ready for review, ready for user testing"
+    },
+    { "name": "spike",
+      "type": "tool",
+      "summary": "A time-boxed coding task to better understand a specific technical requirement"
+    },
+    { "name": "swarming",
+      "type": "activity",
+      "summary": "Team works together on a single user story."
+    },
+    { "name": "user-testing",
+      "type": "activity",
+      "summary": "User test to detect flaws in product hypotheses"
+    },
+    { "name": "velocity",
+      "type": "tool",
+      "summary": "How many story points were completed in the previous iteration."
+    },
+    { "name": "velocity-math",
+      "type": "example",
+      "summary": "Velocity math predicts project completion based on measured velocity."
+    },
+    { "name": "gantt-math",
+      "type": "example",
+      "summary": "Gantt math predicts project completion based on slippage on the critical path."
+    },
+    { "name": "story-point",
+      "type": "tool",
+      "summary": "A completely relative estimate of user story development effort, typically using modified Fibonacci numbers"
+    },
+    { "name": "burnup-chart",
+      "type": "tool",
+      "summary": "A graph plotting developer progress against the release backlog size."
+    },
+    { "name": "burndown-chart",
+      "type": "tool",
+      "summary": "A graph plotting the past and projected size of the remaining story points in release backlog."
+    },
+    { "name": "health-charts",
+      "type": "tool",
+      "summary": "Informal visual displays of team mood."
+    },
+    { "name": "cause-effect-diagram",
+      "type": "tool",
+      "summary": "An analysis of the causal forces leading to recurring issues in development."
+    },
+    { "name": "plan-b",
+      "title": "Plan B",
+      "type": "tool",
+      "summary": "An acceptable, feasible alternative for a development task with great uncertainty."
+    },
+    { "name": "metrics-that-matter",
+      "type": "concept",
+      "summary": "Metrics of central importance to the success of the project."
+    },
+    { "name": "speed-up",
+      "summary": "Tell the developers to increase velocity, in order to make the release deadline."
+    },
+    { "name": "deadline-slip",
+      "summary": "Move the deadline."
+    },
+    { "name": "tracking",
+      "title": "Budgets, Estimates, and Tracking",
+      "type": "activity",
+      "summary": "Monitoring the velocity and quality of development",
+      "goodness": "high"
+    },
+    { "name": "not-done",
+      "summary": "This page not yet written.",
+      "type": "error"
+    }
+  ]
+}

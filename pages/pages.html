@@ -1,0 +1,25 @@
+<div id="activities" class="page-items" data-template="activity-template">  
+  <script type="text/html" id="activity-template">
+    {{#typeMap}}
+    <h1>Activities</h1>
+    {{#activity}}
+    {{> list_template}}
+    {{/activity}}
+    <h1>Tools</h1>
+    {{#tool}}
+    {{> list_template}}
+    {{/tool}}
+    <h1>Miscellaneous</h1>
+    {{#misc}}
+    {{> list_template}}
+    {{/misc}}
+    {{/typeMap}}
+  </script>
+  
+  <script type="text/html" id="list_template" class="partial">
+    <div id="item-{{name}}" class="page-item">
+      <h4><a href="#{{name}}">{{title}}</a>: {{summary}}</h4>
+    <div class="item-box">{{{html}}}</div>
+    </div>
+  </script>
+</div>
