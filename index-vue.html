@@ -56,27 +56,37 @@
 
 
       <div id="main" data-template="main-template">
-          <h2 class="title">{{node.title}}</h2>
+        <h2 class="title">{{node.title}}</h2>
 
-          <div class="content">
-            <p class="summary text-box wide"><strong>Summary:</strong> {{node.summary}}</p>
+        <div class="content">
+          <p class="summary text-box wide"><strong>Summary:</strong> {{node.summary}}</p>
 
-            <div id="item-body">
-              <div id="pageHtml" class="row"></div>
+          <div id="item-body">
+            <div id="pageHtml" class="row"></div>
 
-              <div class="row">
-                <div v-if="node.linkedFrom.length > 0">
-                  <p><strong>Where referenced:</strong></p>
-                  <ul>
-                    <li v-for="link in node.linkedFrom">
-                      <a v-bind:href="'#' + link.name">{{link.title}}</a>
-                    </li>
-                  </ul>
-                </div>
+            <div class="row">
+              <div v-if="node.linkedFrom.length > 0">
+                <p><strong>Where referenced:</strong></p>
+                <ul>
+                  <li v-for="link in node.linkedFrom">
+                    <a v-bind:href="'#' + link.name">{{link.title}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div v-if="node.linkNodes.length > 0">
+                <p><strong>External links:</strong></p>
+                <ul>
+                  <li v-for="node in node.linkNodes">
+                    <a v-bind:href="node.url">{{node.title}}</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-        </script>
+        </div>
       </div>
 
       <footer>

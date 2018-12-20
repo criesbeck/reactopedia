@@ -13,7 +13,12 @@
       "name": "npm",
       "title": "Node Package Manager"
     },
-    { "name": "react"
+    { "name": "react",
+      "links": [
+        "react-home"
+      ]
+    },
+    { "name": "reactopedia"
     },
     {
       "name": "chrome-debugger",
@@ -28,6 +33,9 @@
     { "name": "not-done",
       "summary": "This page not yet written.",
       "type": "error"
+    },
+    { "name": "react-home",
+      "url": "https://reactjs.org/"
     }
   ]
 }

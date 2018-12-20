@@ -7,7 +7,8 @@ const app = new Vue({
     node: {
       title: "N/A",
       pageHtml: "N/A",
-      linkedFrom: []
+      linkedFrom: [],
+      linkNodes: []
     }
   }
 });
@@ -17,33 +18,33 @@ const bookData = { };
 const pageHtml = document.getElementById('pageHtml')
   
 function setBookData(json, callback) {
-  const itemMap = { };
-  const typeMap = { };
+  const itemMap = {};
+  const linkMap = {};
   
   json.items.forEach(function (item) {
-    itemMap[item.name] = item;
-    
-    const type = item.type || 'misc';
-    if (typeMap[type] === undefined) typeMap[type] = [];
-    typeMap[type].push(item);
-    
-    item.title = item.title || makeTitle(item.name);
-    item.linkedFrom = [];
-    item.linksTo = [];
+    if (item.url) {
+      item.title = item.title || makeTitle(item.name);
+      linkMap[item.name] = item;
+    }
+  });
+  
+  json.items.forEach(function (item) {
+    if (!item.url) {
+      itemMap[item.name] = item;
+      item.title = item.title || makeTitle(item.name);
+      item.links = item.links || [];
+      item.linkedFrom = [];
+      item.linksTo = [];
+      item.linkNodes = (item.links || []).map(key => linkMap[key]);
+    }
   });
   
   json.items.sort(function (item1, item2) {
     return item1.title.localeCompare(item2.title);
   });
   
-  Object.keys(typeMap).forEach(function(type) {
-    typeMap[type].sort(function (item1, item2) {
-      return item1.title.localeCompare(item2.title);
-    });
-  });
-  
   bookData.itemMap = itemMap;
-  bookData.typeMap = typeMap;
+  bookData.linkMap = linkMap;
   bookData.errors = getBookDataErrors(itemMap);
   
   bookData.unfiled = [];
@@ -74,10 +75,6 @@ function getItem(name) {
     console.log('No item for ' + name);
     return null;
   }
-}
-
-function itemIs(item, type) {
-  return item.type && item.type === type;
 }
 
 function makeTitle(text) {
@@ -169,16 +166,20 @@ function setPage() {
 }
 
 function loadPage(node) {
-  processPageFile(node,
-    function (data) {
-      app.node.pageHtml = data;
-  }, 
-    function () {
-      updateDisplay();
-  }, 
-    function () {
-      console.log(node.name + '.html not found');
-  });
+  if (node.url) {
+    window.location = node.url;
+  } else {
+    processPageFile(node,
+      function (data) {
+        app.node.pageHtml = data;
+    }, 
+      function () {
+        updateDisplay();
+    }, 
+      function () {
+        console.log(node.name + '.html not found');
+    });
+  }
 }
 
 function addLinksInHtml(source, html) {
@@ -216,11 +217,14 @@ function makeAllIndexLinks(callback) {
 
 function makeIndexPromises() {
   return Object.keys(bookData.itemMap).map(function (key) {
-    return makeIndexPromise(bookData.itemMap[key]);
+    return makeIndexPromise(bookData.itemMap[key], key);
   });
 }
 
-function makeIndexPromise(node) {
+function makeIndexPromise(node, key) {
+  if (node.url) {
+    return Promise.resolve(key);
+  }
   return fetch(pageUrl(node)).then(function(response) {
     if (response.ok) {
       return response.text();
@@ -233,7 +237,7 @@ function makeIndexPromise(node) {
   }).catch(function(error) {
     return error;
   });
-}  
+}
 
 // this makes a set of independent asynchronous calls
 // shows file html, notes if none exists
@@ -272,7 +276,6 @@ function processPageFile(node, doneCb, alwaysCb, failCb) {
     doneCb(text);
   }).finally(alwaysCb);
 }
-
 function pageUrl(node) {
   return 'pages/' + (node.url || node.name)  + '.html';
 }
