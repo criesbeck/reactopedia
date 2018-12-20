@@ -190,7 +190,7 @@
   }
   
   function setPage() {
-    var name = location.hash ? location.hash.substr(1) : 'agile-client-toolbox';
+    var name = location.hash ? location.hash.substr(1) : 'reactopedia';
     var node = getItem(name) || getItem('not-done');
     bookData.currentNode = node;
     
