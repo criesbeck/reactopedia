@@ -96,6 +96,13 @@ function getRedefined(itemNames) {
     return itemNames.indexOf(name) !== itemNames.lastIndexOf(name);
   });
 }
+
+function getUndefinedLinks(itemNames) {
+  return itemNames.map(function (name) {
+    const item = bookData.itemMap[name];
+    return item.links.filter(link => !bookData.linkMap[link]);
+  });
+}
     
 function getBookDataErrors(itemMap) {
   var itemNames = Object.keys(itemMap);
@@ -103,6 +110,10 @@ function getBookDataErrors(itemMap) {
   return [
     { 'label': 'Redefinitions',
       'value': arrayString(getRedefined(itemNames))
+    },
+    {
+      'label': 'Undefined links',
+      'value': arrayString(getUndefinedLinks(itemNames))
     }
   ];
 }

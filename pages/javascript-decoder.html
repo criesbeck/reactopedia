@@ -1,0 +1,120 @@
+  <figure class="image-box wide">
+    <img src="images/react-logo.png">
+  </figure>
+
+  <div><strong>Arrow functions</strong>
+    <p>In React code, you'll often see functions defined using arrow
+      functions</p>
+
+    <pre>const square = x => x * x;</pre>
+
+    <p>rather than <strong>function</strong> notation</p>
+
+    <pre>function square (x) { return x * x; }</pre>
+
+    <p>This is a shorter simpler syntax for functions that just return the value
+      of an expression.
+    </p>
+
+    <p>Unlike <strong>function</strong>, arrow functions do not re-bind the special variable
+      <strong>this</strong>. 
+    </p>
+  </div>
+
+  <div><strong>Method definitions</strong>
+    <p>In React code, you'll often see methods for
+      objects and class components defined like this:</p>
+
+    <pre>const obj = {
+  <strong>foo() {
+    return 'bar';
+  }</strong>
+}</pre>
+
+    <p>rather than like this:</p>
+
+    <pre>const obj = {
+  <strong>foo: function foo() {
+    return 'bar';
+  }</strong>
+}</pre>
+  </div>
+
+  <div>
+    <strong>Destructuring</strong>
+    <p>
+      You'll often see braces around React function parameters,
+      like this
+    </p>
+
+    <pre>const Hello = ({name}) => &lt;h1&gt;Hello, {name}&lt;/h1&gt;;</pre>
+
+    <p>This is using destructuring assignment. It is equivalent to writing this</p>
+
+    <pre>const Hello = (props) => {
+  const name = props.name;
+  &lt;h1&gt;Hello, {name}&lt;/h1&gt;;
+}</pre>
+
+    <p>Destructuring is also used with import statements:</p>
+
+    <pre>import { useState } from 'react';</pre>
+
+    <p>Destructuring is used with arrays:</p>
+
+    <pre>const [state, setState] = useState(initialState);</pre>
+  </div>
+
+  <div><strong>React.Component</strong>
+    <p>
+      React components are often defined like this:
+    </p>
+    
+    <pre>class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}</pre>
+
+    <p>This defines the component <strong>Welcome</strong> as
+      a JavaScript subclass. The class definition can include
+      a constructor, local state variables, and React
+      lifecycle methods. See <a href="#react-classes">React class components</a>
+      for more information.
+    </p>
+  </div>
+
+  <div><strong>Functional Components</strong>
+    <p>More recent React code may define components as simple functions:
+    </p>
+
+    <pre>const Welcome = (props) => &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;</pre>
+
+    <p>This defines the component <strong>Welcome</strong> as
+      a JavaScript function. It is treated as the <strong>render()</strong> 
+      function for the component. There is no local state, constructor, or lifecycle
+      methods.
+    </p>
+  </div>
+
+  <div><strong>Export and import</strong>
+    <p>Definitions marked with <strong>export</strong>, e.g.,</p>
+    
+    <pre>export const loadCart = (cartProducts) => ...</pre>
+
+    <p>can be imported by name for use in another file, e.g.,</p>
+
+    <pre>import { loadCar } from '../../st''../../store/actions/floatCartActions'</pre>
+  </div>
+
+  <div><strong>Export default and import</strong>
+    <p>Definitions marked with<strong>export default</strong>, e.g.,</p>
+    
+    <pre>export default class Welcome extends React.Component {
+  ...
+}</pre>
+
+    <p>can be imported by name for use in another file, e.g.,</p>
+
+    <pre>import Welcome from './Welcome'</pre>
+  </div>

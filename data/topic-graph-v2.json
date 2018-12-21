@@ -3,7 +3,22 @@
   "items": [
     {
       "name": "javascript",
-      "title": "Modern JavaScript"
+      "title": "Modern JavaScript",
+      "links": [
+        "modern-javascript",
+        "react-express-javascript"
+      ]
+    },
+    { "name": "javascript-decoder",
+      "links": [
+        "arrow-functions",
+        "classes",
+        "destructuring-assignment",
+        "javascript-react-native",
+        "method-definitions",
+        "modules-export-mdn",
+        "modules-import-mdn"
+      ]
     },
     {
       "name": "node",
@@ -27,6 +42,9 @@
     { "name": "redux",
       "title": "Managing front-end state with Redux"
     },
+    { "name": "react-home",
+      "url": "https://reactjs.org/"
+    },
     { "name": "react-router",
       "title": "Managing pages with React Router"
     },
@@ -34,8 +52,37 @@
       "summary": "This page not yet written.",
       "type": "error"
     },
-    { "name": "react-home",
-      "url": "https://reactjs.org/"
-    }
+    { "name": "arrow-functions",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
+    },
+    { "name": "classes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes"
+    },
+    { "name": "destructuring-assignment",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+    },
+    { "name": "method-definitions",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions"
+    },
+    { "name": "javascript-react-native",
+      "title": "A Brief Overview of ES6 for React Native Developers",
+      "url": "https://medium.com/the-react-native-log/a-brief-overview-of-es6-for-react-native-developers-15e7c68315da"
+    },
+    { "name": "modules-export-mdn",
+      "title": "export at MDN",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"
+    },
+    { "name": "modules-import-mdn",
+      "title": "import at MDN",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"
+    },
+    { "name": "modern-javascript",
+      "title": "Modern JavaScript Tutorial",
+      "url": "https://javascript.info/"
+    },
+    { "name": "react-express-javascript",
+      "title": "React Express: Modern JavaScript",
+      "url": "http://www.react.express/modern_javascript"
+    }    
   ]
 }
