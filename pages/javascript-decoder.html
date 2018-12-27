@@ -21,7 +21,7 @@
     </p>
   </div>
 
-  <div><strong>Method definitions</strong>
+  <div><strong>Method definitions in objects</strong>
     <p>In React code, you'll often see methods for
       objects and class components defined like this:</p>
 
@@ -41,7 +41,7 @@
   </div>
 
   <div>
-    <strong>Destructuring</strong>
+    <strong>Destructuring assignment</strong>
     <p>
       You'll often see braces around React function parameters,
       like this
@@ -65,7 +65,7 @@
     <pre>const [state, setState] = useState(initialState);</pre>
   </div>
 
-  <div><strong>React.Component</strong>
+  <div><strong>React.Component subclasses</strong>
     <p>
       React components are often defined like this:
     </p>
@@ -117,4 +117,40 @@
     <p>can be imported by name for use in another file, e.g.,</p>
 
     <pre>import Welcome from './Welcome'</pre>
+  </div>
+
+  <div>
+    <strong>const declarations</strong>
+
+    <p>Most local variables in React code are declared with <strong>const</strong>:</p>
+
+    <pre>const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  // illegal
+    </pre>
+
+    <p>A <strong>const</strong> variable, when applicable, is preferred to a
+      <strong>var</strong> variable,
+      because it is block-scoped, rather than function-scoped, 
+      and can't be reassigned another the value. These
+      restrictions make code with <strong>const</strong> variables easier to maintain
+      than code with <strong>var</strong> variables.
+    </p>
+
+    <p>
+      Note that you <em>can</em> modify a structure stored in a <strong>const</strong> variable, e.g.,
+    </p>
+
+    <pre>weekdays.unshift(weekdays.pop()) // weekdays is now ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</pre>
+  </div>
+
+  <div>
+    <strong>let declarations</strong>
+
+    <p>React code that needs local variables that can be reassigned are declared with <strong>let</strong>:</p>
+
+    <pre>let weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  // OK</pre>
+
+    <p><strong>let</strong> is preferred to <strong>var</strong> because it is block-scoped.
+    </p>
   </div>

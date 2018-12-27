@@ -1,6 +1,13 @@
 { 
-  "entryPoints": [ "activities", "tools", "pages" ],
+  "entryPoints": [ "reactopedia", "pages" ],
   "items": [
+    {
+      "name": "functional-programming",
+      "links": [
+        "modern-javascript",
+        "map-filter-reduce"
+      ]
+    },
     {
       "name": "javascript",
       "title": "Modern JavaScript",
@@ -67,6 +74,11 @@
     { "name": "javascript-react-native",
       "title": "A Brief Overview of ES6 for React Native Developers",
       "url": "https://medium.com/the-react-native-log/a-brief-overview-of-es6-for-react-native-developers-15e7c68315da"
+    },
+    {
+      "name": "map-filter-reduce",
+      "title": "Functional Programming in JS: map, filter, reduce",
+      "url": "https://hackernoon.com/functional-programming-in-js-map-filter-reduce-pt-5-308a205fdd5f"
     },
     { "name": "modules-export-mdn",
       "title": "export at MDN",

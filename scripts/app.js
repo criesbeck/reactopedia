@@ -37,9 +37,7 @@ function setBookData(json, callback) {
     }
   });
 
-  json.items.sort((item1, item2) => {
-    return item1.title.localeCompare(item2.title);
-  });
+  json.items.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
   bookData.itemMap = itemMap;
   bookData.linkMap = linkMap;
@@ -54,35 +52,21 @@ function setBookData(json, callback) {
   });
 }
 
-function getByField(x, items, field) {
-  for (let i = 0; i < items.length; ++i) {
-    let item = items[i];
-    if (item[field] == x) {
-      return item;
-    }
-  }
-  return null;
-}
-
 function getItem(name) {
-  var item = bookData.itemMap[name];
+  const item = bookData.itemMap[name];
   if (item) {
     return item;
   }
-  
-    console.log('No item for ' + name);
-    return null;
-  
+  console.log(`No item for ${name}`);
+  return null;
 }
 
 function makeTitle(text) {
   if (text) {
-    var spaced = text.replace(/[_-]/g, ' ');
+    const spaced = text.replace(/[_-]/g, ' ');
     return spaced.charAt(0).toLocaleUpperCase() + spaced.slice(1);
   }
-  
-    return '';
-  
+  return '';
 }
 
 function arrayString(a) {
@@ -90,7 +74,7 @@ function arrayString(a) {
 }
 
 function getRedefined(itemNames) {
-  return itemNames.filter((name) => itemNames.indexOf(name) !== itemNames.lastIndexOf(name));
+  return itemNames.filter(name => itemNames.indexOf(name) !== itemNames.lastIndexOf(name));
 }
 
 function getUndefinedLinks(itemNames) {
@@ -101,11 +85,10 @@ function getUndefinedLinks(itemNames) {
 }
 
 function getBookDataErrors(itemMap) {
-  let itemNames = Object.keys(itemMap);
-  let items = itemNames.map((name) => { return itemMap[name]; });
+  const itemNames = Object.keys(itemMap);
   return [
     {
- label: 'Redefinitions',
+      label: 'Redefinitions',
       value: arrayString(getRedefined(itemNames)),
     },
     {
@@ -133,9 +116,9 @@ function loadBook(url, callback) {
   }).then((json) => {
     setBookData(json, callback);
   }).catch((error) => {
-    var msg = error.message ? error.message : "N/A";
-    setBookData({ errors: [{ 'status': msg, 'error': error }] }, callback);
-    updateDisplay(); 
+    const status = error.message ? error.message : 'N/A';
+    setBookData({ errors: [{ status, error }] }, callback);
+    updateDisplay();
   });
 }
 
@@ -149,10 +132,10 @@ function getAllLinks(node) {
 }
 
 function expandLinks(nodes) {
-  let links = [];
+  const links = [];
   nodes.forEach((node) => {
-    node.linksTo.forEach(function(link) {
-      if (links.indexOf(link) === -1 && nodes.indexOf(link) == -1) {
+    node.linksTo.forEach((link) => {
+      if (links.indexOf(link) === -1 && nodes.indexOf(link) === -1) {
         links.push(link);
       }
     });
@@ -161,8 +144,8 @@ function expandLinks(nodes) {
 }
 
 function setPage() {
-  let name = location.hash ? location.hash.substr(1) : 'reactopedia';
-  let node = getItem(name) || getItem('not-done');
+  const name = window.location.hash ? window.location.hash.substr(1) : 'reactopedia';
+  const node = getItem(name) || getItem('not-done');
   app.node = node;
 
   if (node.pageHtml) {
@@ -179,23 +162,23 @@ function loadPage(node) {
     processPageFile(node,
       (data) => {
         app.node.pageHtml = data;
-    },
+      },
       () => {
         updateDisplay();
-    },
+      },
       () => {
-        console.log(node.name + '.html not found');
-    });
+        console.log(`${node.name}.html not found`);
+      });
   }
 }
 
 function addLinksInHtml(source, html) {
   bookData.assets.push(pageUrl(source));
   source.pageHtml = html;
-  let frag = document.createRange().createContextualFragment(html);
-  return frag.querySelectorAll('a[href^=\\#]').forEach((elt) => { 
-    var key = elt.getAttribute('href').slice(1);
-    var dest = bookData.itemMap[key];
+  const frag = document.createRange().createContextualFragment(html);
+  return frag.querySelectorAll('a[href^=\\#]').forEach((elt) => {
+    const key = elt.getAttribute('href').slice(1);
+    const dest = bookData.itemMap[key];
     if (dest) {
       addLink(source, dest);
     }
@@ -212,9 +195,7 @@ function addNodeLink(node, lst) {
     lst.push(node);
   }
   if (lst.length > 1) {
-    lst.sort((node1, node2) => {
-      return node1.title.localeCompare(node2.title);
-    });
+    lst.sort((node1, node2) => node1.title.localeCompare(node2.title));
   }
 }
 
@@ -223,22 +204,18 @@ function makeAllIndexLinks(callback) {
 }
 
 function makeIndexPromises() {
-  return Object.keys(bookData.itemMap).map((key) => {
-    return makeIndexPromise(bookData.itemMap[key], key);
-  });
+  return Object.keys(bookData.itemMap).map(key => makeIndexPromise(bookData.itemMap[key], key));
 }
 
 function makeIndexPromise(node, key) {
   if (node.url) {
     return Promise.resolve(key);
   }
-  return fetch(pageUrl(node)).then(function(response) {
+  return fetch(pageUrl(node)).then((response) => {
     if (response.ok) {
       return response.text();
     }
-    
-      bookData.unfiled.push(node.name);
-    
+    bookData.unfiled.push(node.name);
   }).then((text) => {
     addLinksInHtml(node, text);
   }).catch((error) => {
@@ -251,24 +228,21 @@ function makeIndexPromise(node, key) {
 function displayPages() {
   let nodes = bookData.subtopics || getNodes(Object.keys(bookData.itemMap));
   nodes.forEach((node) => {
-    var elt = document.getElementById('item-' + node.name);
+    const elt = document.getElementById('item-' + node.name);
     if (elt) {
-      processPageFile(node, 
-        function(html) {
-          elt.classList.add('file-exists'); 
+      processPageFile(node,
+        (html) => {
+          elt.classList.add('file-exists');
           elt.querySelector('.item-box').innerHTML = html;
-        }, 
-        function() { return true; },
-        function() { elt.classList.add('file-missing'); }
-      );
+        },
+        () => true,
+        () => { elt.classList.add('file-missing'); });
     }
   });
 }
 
 function getNodes(keys) {
-  return keys && keys.map((key) => {
-    return bookData.itemMap[key];
-  });
+  return keys && keys.map(key => bookData.itemMap[key]);
 }
 
 function processPageFile(node, doneCb, alwaysCb, failCb) {
@@ -276,15 +250,13 @@ function processPageFile(node, doneCb, alwaysCb, failCb) {
     if (response.ok) {
       return response.text();
     }
-    else {
-      failCb();
-    }
+    return failCb();
   }).then((text) => {
     doneCb(text);
   }).finally(alwaysCb);
 }
 function pageUrl(node) {
-  return `pages/${  node.url || node.name   }.html`;
+  return `pages/${node.url || node.name}.html`;
 }
 
 
