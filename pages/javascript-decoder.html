@@ -1,156 +1,139 @@
-  <figure class="image-box wide">
-    <img src="images/react-logo.png">
-  </figure>
 
-  <div><strong>Arrow functions</strong>
-    <p>In React code, you'll often see functions defined using arrow
-      functions</p>
+<div><strong>Arrow functions</strong>
+  <pre>const square = x => x * x;</pre>
 
-    <pre>const square = x => x * x;</pre>
+  <p>This code defines the function <strong>square</strong>
+    using arrow notation. It is about the same as
 
-    <p>rather than <strong>function</strong> notation</p>
+  <pre>function square (x) { return x * x; }</pre>
 
-    <pre>function square (x) { return x * x; }</pre>
+  <p>An arrow function is simpler, especially with functions that just return a value,
+    and does not re-bind the special variable
+    <strong>this</strong>. 
+  </p>
+</div>
 
-    <p>This is a shorter simpler syntax for functions that just return the value
-      of an expression.
-    </p>
-
-    <p>Unlike <strong>function</strong>, arrow functions do not re-bind the special variable
-      <strong>this</strong>. 
-    </p>
-  </div>
-
-  <div><strong>Method definitions in objects</strong>
-    <p>In React code, you'll often see methods for
-      objects and class components defined like this:</p>
-
-    <pre>const obj = {
+<div><strong>Method definitions in objects</strong>
+  <pre>const obj = {
   <strong>foo() {
     return 'bar';
   }</strong>
 }</pre>
 
-    <p>rather than like this:</p>
+  <p>This code defines the method <strong>obj.foo()</strong>. It is the same
+    as the following, but briefer:</p>
 
-    <pre>const obj = {
+  <pre>const obj = {
   <strong>foo: function foo() {
     return 'bar';
   }</strong>
 }</pre>
-  </div>
+</div>
 
-  <div>
-    <strong>Destructuring assignment</strong>
-    <p>
-      You'll often see braces around React function parameters,
-      like this
-    </p>
+<div>
+  <strong>Destructuring object assignment</strong>
+  <pre>const Hello = <strong>({name})</strong> => &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;</pre>
 
-    <pre>const Hello = ({name}) => &lt;h1&gt;Hello, {name}&lt;/h1&gt;;</pre>
+  <p>This code is using destructuring object assignment. It is the same as this:</p>
 
-    <p>This is using destructuring assignment. It is equivalent to writing this</p>
-
-    <pre>const Hello = (props) => {
-  const name = props.name;
+  <pre>const Hello = <strong>(props) => {
+  const name = props.name;</strong>
   &lt;h1&gt;Hello, {name}&lt;/h1&gt;;
 }</pre>
+</div>
 
-    <p>Destructuring is also used with import statements:</p>
+<div><strong>Destructuring array assignment</strong>
+<pre>const [state, setState] = useState(initialState);</pre>
 
-    <pre>import { useState } from 'react';</pre>
+<p>This code is using destructuring array assignment. It is shorthand for:</p>
 
-    <p>Destructuring is used with arrays:</p>
+<pre>const parts = useState(initialState);
+const state = parts[0];
+const setState = parts[1];</pre>
+</div>
 
-    <pre>const [state, setState] = useState(initialState);</pre>
-  </div>
+<div><strong>Destructuring import</strong>
+  <pre>import { useState } from 'react';</pre>
 
-  <div><strong>React.Component subclasses</strong>
-    <p>
-      React components are often defined like this:
-    </p>
-    
-    <pre>class Welcome extends React.Component {
+  <p>This is importing just the name <strong>useState</strong> from the React module</p>
+</div>
+
+<div><strong>Functional Components</strong>
+  <pre>const Welcome = (props) => &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;</pre>
+
+  <p>This defines the React component <strong>Welcome</strong> as
+    a simple JavaScript function that calls <strong>render()</strong>.
+    This is the simplest way to define components with no local state, constructor, or lifecycle
+    methods.
+  </p>
+</div>
+
+<div><strong>React.Component subclasses</strong>
+  <pre>class Welcome extends React.Component {
   render() {
     return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
   }
 }</pre>
 
-    <p>This defines the component <strong>Welcome</strong> as
-      a JavaScript subclass. The class definition can include
-      a constructor, local state variables, and React
-      lifecycle methods. See <a href="#react-classes">React class components</a>
-      for more information.
-    </p>
-  </div>
+  <p>This defines the component <strong>Welcome</strong> as
+    a JavaScript subclass. The class definition can include
+    a constructor, local state variables, and React
+    lifecycle methods. See <a href="#react-classes">React class components</a>
+    for more information.
+  </p>
+</div>
 
-  <div><strong>Functional Components</strong>
-    <p>More recent React code may define components as simple functions:
-    </p>
+<div><strong>Export</strong>
+  <pre>export const loadCart = (cartProducts) => ...</pre>
 
-    <pre>const Welcome = (props) => &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;</pre>
+  <p>This exports <strong>loadCart()</strong> from a module, so that 
+    it can be imported in another module, like this</p>
 
-    <p>This defines the component <strong>Welcome</strong> as
-      a JavaScript function. It is treated as the <strong>render()</strong> 
-      function for the component. There is no local state, constructor, or lifecycle
-      methods.
-    </p>
-  </div>
+  <pre>import { loadCart } from '../../store/actions/floatCartActions'</pre>
+</div>
 
-  <div><strong>Export and import</strong>
-    <p>Definitions marked with <strong>export</strong>, e.g.,</p>
-    
-    <pre>export const loadCart = (cartProducts) => ...</pre>
-
-    <p>can be imported by name for use in another file, e.g.,</p>
-
-    <pre>import { loadCar } from '../../st''../../store/actions/floatCartActions'</pre>
-  </div>
-
-  <div><strong>Export default and import</strong>
-    <p>Definitions marked with<strong>export default</strong>, e.g.,</p>
-    
-    <pre>export default class Welcome extends React.Component {
-  ...
+<div><strong>Export default</strong>
+  <pre>export default class Welcome extends React.Component {
+...
 }</pre>
 
-    <p>can be imported by name for use in another file, e.g.,</p>
+  <p>This defines <strong>Welcome</strong> as the default name exported
+    from a module, so that it can be imported in another file like this</p>
 
-    <pre>import Welcome from './Welcome'</pre>
-  </div>
+  <pre>import Welcome from './Welcome'</pre>
+</div>
 
-  <div>
-    <strong>const declarations</strong>
+<div>
+  <strong>const variable declarations</strong>
+  <pre>const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+<span style="color:red">weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  // illegal</span>
+  </pre>
 
-    <p>Most local variables in React code are declared with <strong>const</strong>:</p>
+  <p>This declares <strong>weekdays</strong> as a local variable with block scope
+    that can't be reassigned a new value. Most variables should be declared this
+    way. Such code is easier to analyze and maintain.
+  </p>
 
-    <pre>const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  // illegal
-    </pre>
+  <p>
+    Note a structure stored in a <strong>const</strong> variable can be modified, e.g.,
+  </p>
 
-    <p>A <strong>const</strong> variable, when applicable, is preferred to a
-      <strong>var</strong> variable,
-      because it is block-scoped, rather than function-scoped, 
-      and can't be reassigned another the value. These
-      restrictions make code with <strong>const</strong> variables easier to maintain
-      than code with <strong>var</strong> variables.
-    </p>
+  <pre>weekdays.unshift(weekdays.pop()) // weekdays is now ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</pre>
+</div>
 
-    <p>
-      Note that you <em>can</em> modify a structure stored in a <strong>const</strong> variable, e.g.,
-    </p>
+<div>
+  <strong>let declarations</strong>
+  <pre>const getItem = (key, items) => {
+  <strong>let item = items.find(item => item.key === key);</strong>
+  if (!item) {
+    item = { key };
+    items.push(item);
+  }
+  return item;
+}</pre>
 
-    <pre>weekdays.unshift(weekdays.pop()) // weekdays is now ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']</pre>
-  </div>
-
-  <div>
-    <strong>let declarations</strong>
-
-    <p>React code that needs local variables that can be reassigned are declared with <strong>let</strong>:</p>
-
-    <pre>let weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];  // OK</pre>
-
-    <p><strong>let</strong> is preferred to <strong>var</strong> because it is block-scoped.
-    </p>
-  </div>
+  <p>This declares a local variable <strong>item</strong> with block scope that can be reassigned. 
+    <strong>let</strong> is preferred over <strong>var</strong> because it has
+    narrower scope.
+  </p>
+</div>

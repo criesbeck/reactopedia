@@ -45,10 +45,12 @@ function setBookData(json, callback) {
 
   bookData.unfiled = [];
   bookData.assets = [];
-  makeAllIndexLinks(() => {
+  makeAllIndexLinks().then(() => {
     window.onhashchange = setPage;
     setPage();
-    if (callback) callback(bookData);
+    if (callback) {
+      callback(bookData);
+    }
   });
 }
 
@@ -108,18 +110,16 @@ function updateDisplay() {
   }
 }
 
-function loadBook(url, callback) {
-  fetch(url).then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-  }).then((json) => {
+async function loadBook(url, callback) {
+  try {
+    const response = await fetch(url);
+    const json = await response.json();
     setBookData(json, callback);
-  }).catch((error) => {
-    const status = error.message ? error.message : 'N/A';
+  } catch (error) {
+    const status = error.message || 'N/A';
     setBookData({ errors: [{ status, error }] }, callback);
     updateDisplay();
-  });
+  }
 }
 
 function getAllLinks(node) {
@@ -199,36 +199,38 @@ function addNodeLink(node, lst) {
   }
 }
 
-function makeAllIndexLinks(callback) {
-  Promise.all(makeIndexPromises()).then(callback);
+async function makeAllIndexLinks() {
+  return Promise.all(makeIndexPromises());
 }
 
 function makeIndexPromises() {
   return Object.keys(bookData.itemMap).map(key => makeIndexPromise(bookData.itemMap[key], key));
 }
 
-function makeIndexPromise(node, key) {
+async function makeIndexPromise(node, key) {
   if (node.url) {
-    return Promise.resolve(key);
+    return key;
   }
-  return fetch(pageUrl(node)).then((response) => {
-    if (response.ok) {
-      return response.text();
+  try {
+    const response = await fetch(pageUrl(node));
+    if (!response.ok) {
+      throw Error(response.statusText);
     }
-    bookData.unfiled.push(node.name);
-  }).then((text) => {
+    const text = await response.text();
     addLinksInHtml(node, text);
-  }).catch((error) => {
-    return error;
-  });
+    return key;
+  } catch (error) {
+    bookData.unfiled.push(node.name);
+    return key;
+  }
 }
 
 // this makes a set of independent asynchronous calls
 // shows file html, notes if none exists
 function displayPages() {
-  let nodes = bookData.subtopics || getNodes(Object.keys(bookData.itemMap));
+  const nodes = bookData.subtopics || getNodes(Object.keys(bookData.itemMap));
   nodes.forEach((node) => {
-    const elt = document.getElementById('item-' + node.name);
+    const elt = document.getElementById(`item-${node.name}`);
     if (elt) {
       processPageFile(node,
         (html) => {
