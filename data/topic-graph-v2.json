@@ -13,7 +13,8 @@
       "title": "Modern JavaScript",
       "links": [
         "modern-javascript",
-        "react-express-javascript"
+        "react-express-javascript",
+        "airbnb-style-guide"
       ]
     },
     { "name": "javascript-decoder",
@@ -29,11 +30,17 @@
     },
     {
       "name": "node",
-      "title": "Node and the Node ecosystem"
+      "title": "Node and the Node ecosystem",
+      "links": [
+        "express-mdn"
+      ]
     },
     {
       "name": "npm",
-      "title": "Node Package Manager"
+      "title": "Node Package Manager",
+      "links": [
+        "yarn-npm-cheatsheet"
+      ]
     },
     { "name": "react",
       "links": [
@@ -58,6 +65,10 @@
     { "name": "not-done",
       "summary": "This page not yet written.",
       "type": "error"
+    },
+    {
+      "name": "airbnb-style-guide",
+      "url": "https://github.com/airbnb/javascript"
     },
     { "name": "arrow-functions",
       "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
@@ -95,6 +106,15 @@
     { "name": "react-express-javascript",
       "title": "React Express: Modern JavaScript",
       "url": "http://www.react.express/modern_javascript"
-    }    
+    },
+    { "name": "express-mdn",
+      "title": "Express/Node Introduction at MDN",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction"
+    },
+    {
+      "name": "yarn-npm-cheatsheet",
+      "title": "NPM vs Yarn Cheatsheet",
+      "url": "https://shift.infinite.red/npm-vs-yarn-cheat-sheet-8755b092e5cc"
+    }
   ]
 }

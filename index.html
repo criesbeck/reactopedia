@@ -54,11 +54,13 @@
       </nav>
 
 
-      <div id="main" data-template="main-template">
-        <h2 class="title">{{node.title}}</h2>
+      <div id="main">
+        <h2 v-if="node" class="title">{{node.title}}</h2>
+        <h2 v-else class="title">All Pages</h2>
+
 
         <div class="content">
-          <p v-if="node.summar">class="summary text-box wide"><strong>Summary:</strong> {{node.summary}}</p>
+          <p v-if="node.summary">class="summary text-box wide"><strong>Summary:</strong> {{node.summary}}</p>
 
           <div id="item-body">
             <div id="pageHtml" class="row"></div>

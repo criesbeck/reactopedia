@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-@media screen {
-  footer {
-  }
-}
-
 @media print {
   footer {
     position: fixed;
@@ -81,6 +76,24 @@ figure img {
   border: 1px solid grey;
   text-align: left;
   max-width: 18em;
+}
+
+.page-item-box {
+  max-height: 10em;
+  overflow: auto;
+}
+
+.page-item-box div {
+  padding: 0.5em 0;
+}
+
+#item-body .page-item-box figure {
+  float: left;
+  border-width: 0px;
+}
+
+.page-item-box img {
+  max-height: 3em;
 }
 
 .image-box, #item-body figure {

@@ -18,26 +18,19 @@ const pageHtml = document.getElementById('pageHtml');
 function setBookData(json, callback) {
   const itemMap = {};
   const linkMap = {};
+  const items = json.items.map(expandItem);
 
-  json.items.forEach((item) => {
+  items.forEach((item) => {
     if (item.url) {
-      item.title = item.title || makeTitle(item.name);
       linkMap[item.name] = item;
-    }
-  });
-
-  json.items.forEach((item) => {
-    if (!item.url) {
+    } else {
       itemMap[item.name] = item;
-      item.title = item.title || makeTitle(item.name);
-      item.links = item.links || [];
-      item.linkedFrom = [];
-      item.linksTo = [];
-      item.linkNodes = (item.links || []).map(key => linkMap[key]);
     }
   });
 
-  json.items.sort((item1, item2) => item1.title.localeCompare(item2.title));
+  items.forEach((item) => {
+    item.linkNodes = item.links.map(key => linkMap[key]);
+  });
 
   bookData.itemMap = itemMap;
   bookData.linkMap = linkMap;
@@ -54,8 +47,18 @@ function setBookData(json, callback) {
   });
 }
 
+function expandItem(item) {
+  return {
+    title: makeTitle(item.name),
+    links: [],
+    linkedFrom: [],
+    linksTo: [],
+    ...item,
+  };
+}
+
 function getItem(name) {
-  const item = bookData.itemMap[name];
+  const item = bookData.itemMap[name] || bookData.linkMap[name];
   if (item) {
     return item;
   }
@@ -104,10 +107,6 @@ function updateDisplay() {
   pageHtml.innerHTML = app.node.pageHtml;
   bookData.subtopics = getNodes(app.node.topics);
   window.scroll(0, 0);
-
-  if (app.node.type === 'page-list') {
-    displayPages();
-  }
 }
 
 async function loadBook(url, callback) {
@@ -145,21 +144,27 @@ function expandLinks(nodes) {
 
 function setPage() {
   const name = window.location.hash ? window.location.hash.substr(1) : 'reactopedia';
-  const node = getItem(name) || getItem('not-done');
+  const node = getPageNode(name);
   app.node = node;
-
-  if (node.pageHtml) {
+  if (app.node.pageHtml) {
     updateDisplay();
   } else {
-    loadPage(node);
+    loadPage();
   }
 }
 
-function loadPage(node) {
-  if (node.url) {
-    window.location = node.url;
+function getPageNode(name) {
+  if (name === 'pages') {
+    return makePagesNode();
+  }
+  return getItem(name) || getItem('not-done');
+}
+
+function loadPage() {
+  if (app.node.url) {
+    window.location = app.node.url;
   } else {
-    processPageFile(node,
+    processPageFile(app.node,
       (data) => {
         app.node.pageHtml = data;
       },
@@ -167,7 +172,7 @@ function loadPage(node) {
         updateDisplay();
       },
       () => {
-        console.log(`${node.name}.html not found`);
+        console.log(`${app.node.name}.html not found`);
       });
   }
 }
@@ -225,22 +230,29 @@ async function makeIndexPromise(node, key) {
   }
 }
 
-// this makes a set of independent asynchronous calls
-// shows file html, notes if none exists
-function displayPages() {
-  const nodes = bookData.subtopics || getNodes(Object.keys(bookData.itemMap));
-  nodes.forEach((node) => {
-    const elt = document.getElementById(`item-${node.name}`);
-    if (elt) {
-      processPageFile(node,
-        (html) => {
-          elt.classList.add('file-exists');
-          elt.querySelector('.item-box').innerHTML = html;
-        },
-        () => true,
-        () => { elt.classList.add('file-missing'); });
-    }
-  });
+function makePagesNode() {
+  return {
+    name: 'pages',
+    title: 'All Pages',
+    pageHtml: makeAllPagesHtml(),
+    linkedFrom: [],
+    linkNodes: [],
+  };
+}
+
+function makeAllPagesHtml() {
+  return Object.keys(bookData.itemMap).sort()
+    .map(key => makePageBox(bookData.itemMap[key])).join('');
+}
+
+function makePageBox(node) {
+  if (node.type === 'error') {
+    return '';
+  }
+  return `<div id="item-${node.name}" class="page-item">
+  <h4><a href="#${node.name}">${node.title}</a></h4>
+  <div class="page-item-box">${node.pageHtml}</div>
+</div>`;
 }
 
 function getNodes(keys) {
@@ -257,6 +269,7 @@ function processPageFile(node, doneCb, alwaysCb, failCb) {
     doneCb(text);
   }).finally(alwaysCb);
 }
+
 function pageUrl(node) {
   return `pages/${node.url || node.name}.html`;
 }
